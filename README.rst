@@ -50,12 +50,20 @@ appended to it, with ``<group_name>`` set to the group name assigned
 This ensures that you access the section of the EKS cluster to which
 you have been authenticated.
 
+Test EKS cluster credentials
+============================
+
+Once credentials have been obtained, the following command and response
+indicates that authentication and communication with the EKS cluster
+has been established:
+
+.. code:: bash
+
+  $ kubectl get pods
+  No resources found in <group_name> namespace.
 
 .. _eks: https://aws.amazon.com/eks/
 .. _github_join: https://github.com/join
 .. _greek_alphabet: https://en.wikipedia.org/wiki/Greek_alphabet
 .. _login: https://login.africalim.ratt.center
 .. _install_kubectl: https://kubernetes.io/docs/tasks/tools/#kubectl
-
-
-
