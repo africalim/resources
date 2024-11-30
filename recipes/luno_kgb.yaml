@@ -55,14 +55,10 @@ opts:
         # output.columns: [CORRECTED_DATA_QCAL, WEIGHT_SPECTRUM]
         output.flags: true
         output.apply_p_jones_inv: false
-        # output.net_gains: [[G,K,B],[G,K,B,P]]
+        # output.net_gains: [G,K,B]
         mad_flags.enable: false
-        mad_flags.threshold_bl: 7.5
-        mad_flags.threshold_global: 0
-        mad_flags.max_deviation: 0
-        dask.threads: 1
-        dask.workers: 2
-        dask.scheduler: distributed
+        dask.threads: 2
+        dask.scheduler: threads
         G.type: diag_complex
         G.time_interval: 0
         G.freq_interval: 0
@@ -97,7 +93,7 @@ opts:
         solver.iter_recipe: [0, 0, 0, 150]
         solver.propagate_flags: false
         solver.robust: false
-        solver.threads: 2
+        solver.threads: 8
         solver.reference_antenna: 2
         output.gain_directory: '{recipe.basedir}/delay_and_offset.qc'
         output.log_directory: '{recipe.basedir}/'
@@ -106,11 +102,10 @@ opts:
         # output.columns: [CORRECTED_DATA_QCAL, WEIGHT_SPECTRUM]
         output.flags: false
         output.apply_p_jones_inv: false
-        output.net_gains: [[G,K,B,D,P],[G,K,B,D]]
+        output.net_gains: [G,K,B,D]
         mad_flags.enable: false
         dask.threads: 4
-        dask.workers: 2
-        dask.scheduler: distributed
+        dask.scheduler: threads
         G.type: diag_complex  #amp
         G.time_interval: 1
         G.freq_interval: 0
@@ -124,7 +119,7 @@ opts:
         B.time_interval: 0
         B.freq_interval: 1
         B.load_from: '{recipe.basedir}/gkb.qc/B'
-        D.type: delay_and_offset  # phase to target
+        D.type: delay_and_offset
         D.time_interval: 0
         D.freq_interval: 0
         D.initial_estimate: false
@@ -145,18 +140,18 @@ opts:
         solver.iter_recipe: [0, 0, 0, 0, 0, 0]
         solver.propagate_flags: false
         solver.robust: false
-        solver.threads: 2
+        solver.threads: 4
         solver.reference_antenna: 2
         output.gain_directory: '{recipe.basedir}/target_init.qc'
         output.log_directory: '{recipe.basedir}/'
         output.overwrite: true
-        output.products: [corrected_data, corrected_weight]
-        output.columns: [CORRECTED_DATA_QCAL, WEIGHT_SPECTRUM]
+        # output.products: [corrected_data, corrected_weight]
+        # output.columns: [CORRECTED_DATA_QCAL, WEIGHT_SPECTRUM]
         output.flags: false
         output.apply_p_jones_inv: false
-        output.net_gains: [[G,K,B,D,P],[G,K,B,D]]
+        output.net_gains: [G,K,B,D]
         mad_flags.enable: false
-        dask.threads: 16
+        dask.threads: 4
         dask.scheduler: threads
         G.type: diag_complex  #amp
         G.time_interval: 1
@@ -168,22 +163,15 @@ opts:
         K.freq_interval: 0
         K.initial_estimate: false
         K.load_from: '{recipe.basedir}/gkb.qc/K'
-        B.type: complex
+        B.type: diag_complex
         B.time_interval: 0
         B.freq_interval: 1
         B.load_from: '{recipe.basedir}/gkb.qc/B'
-        C.type: crosshand_phase_null_v
-        C.time_interval: 0
-        C.freq_interval: 1
-        C.load_from: '{recipe.basedir}/crosshand_phase.qc/C'
         D.type: delay_and_offset  # phase to target
         D.time_interval: 1
         D.freq_interval: 0
         D.initial_estimate: false
         D.load_from: '{recipe.basedir}/delay_and_offset.qc/D'
-        P.type: parallactic_angle  # not tracking non-sidereal source
-        P.time_interval: 1
-        P.freq_interval: 0
 
 cabs:
   G2abs:
