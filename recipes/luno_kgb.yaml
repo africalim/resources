@@ -1,5 +1,5 @@
 _include:
-  - (quartical)stimela_cabs.yaml
+  - (cultcargo)quartical.yml
 
 opts:
   log:
@@ -14,8 +14,8 @@ opts:
   info: First generation KGB calibration using QuartiCal
 
   assign:
-    ms_cals: /home/bester/projects/MOON/msdir/l.ms
-    ms_target: /home/bester/projects/MOON/msdir/l_moon.ms
+    ms_cals: s3://ratt-public-data/LBAND_LUNO_CALIBRATORS.zarr
+    ms_target: s3://ratt-public-data/LBAND_LUNO_TARGET.zarr
 
   inputs:
     basedir:
@@ -53,7 +53,7 @@ opts:
         output.overwrite: true
         # output.products: [corrected_data, corrected_weight]
         # output.columns: [CORRECTED_DATA_QCAL, WEIGHT_SPECTRUM]
-        output.flags: true
+        output.flags: false
         output.apply_p_jones_inv: false
         # output.net_gains: [G,K,B]
         mad_flags.enable: false
@@ -115,7 +115,7 @@ opts:
         K.freq_interval: 0
         K.initial_estimate: false
         K.load_from: '{recipe.basedir}/gkb.qc/K'
-        B.type: complex
+        B.type: diag_complex
         B.time_interval: 0
         B.freq_interval: 1
         B.load_from: '{recipe.basedir}/gkb.qc/B'
@@ -136,8 +136,8 @@ opts:
         input_ms.select_fields: [0]
         input_ms.sigma_column: SIGMA_SPECTRUM
         input_model.apply_p_jones: false
-        solver.terms: [G, K, B, D, C, P]
-        solver.iter_recipe: [0, 0, 0, 0, 0, 0]
+        solver.terms: [G, K, B, D]
+        solver.iter_recipe: [0, 0, 0, 0]
         solver.propagate_flags: false
         solver.robust: false
         solver.threads: 4
