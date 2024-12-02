@@ -66,7 +66,7 @@ If this does not work without appending your namespace to the command then run
 
 .. code:: bash
 
-  $ kubectl config set-context --current --namespace=admin
+  $ kubectl config set-context --current --namespace=<group_name>
 
 
 
