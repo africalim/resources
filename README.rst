@@ -62,6 +62,14 @@ has been established:
   $ kubectl get pods
   No resources found in <group_name> namespace.
 
+If this does not work without appending your namespace to the command then run
+
+.. code:: bash
+
+  $ kubectl config set-context --current --namespace=admin
+
+
+
 .. _eks: https://aws.amazon.com/eks/
 .. _github_join: https://github.com/join
 .. _greek_alphabet: https://en.wikipedia.org/wiki/Greek_alphabet
