@@ -1,5 +1,5 @@
 _include:
-  - (pfb)stimela_cabs.yaml
+  - (cultcargo)pfb-imaging.yml
 
 
 
@@ -12,21 +12,26 @@ opts:
 
 movie:
   name: movie
-  info: Make movies of the calibrated data
-
-  assign:
-    output-filename: '{recipe.basedir}/{recipe.obs}/stage0'
-    fits-output-folder: '{recipe.basedir}/{recipe.obs}/fits'
-    log-directory: '{recipe.basedir}/{recipe.obs}/logs'
-
-  aliases:
-    output-filename: '*.output-filename'
-    fits-output-folder: '*.fits-output-folder'
-    log-directory: '*.log-directory'
-    nworkers: '*.nworkers'
-    nthreads: '*.nthreads'
+  info: Image a column with high time cadence and turn it into a movie 
 
   inputs:
+    s3dir:
+      dtype: URI
+      required: true 
+      info:
+        Base S3 directory place the output in
+    efsdir:
+      dtype: str
+      default: /mnt/data/admin
+      info:
+        Path to the EFS volume mounted in the ocntainer.
+        This should be /mnt/data/{group_name}
+    stage:
+      dtype: str
+      required: true
+      info:
+        A descriptive string to identify the stage of processing.
+        Suggest using the Jones chain e.g. KGB
     ms:
       dtype: URI
       required: true
@@ -56,13 +61,18 @@ movie:
       default: DATA
       info:
         Name of column to image
+    sigma-column:
+      dtype: str
+      default: SIGMA_SPECTRUM
+      info:
+        Column containing standard deviation of data
     robustness:
       dtype: float
       default: -1.5
       info:
         Robustness value of Briggs weighting scheme
     output-format:
-      dtype: float
+      dtype: str
       default: zarr
       info:
         Output images as fits or zarr
@@ -86,16 +96,6 @@ movie:
       default: 8
       info:
         Number of frames per second
-    nworkers:
-      dtype: int
-      default: 4
-      info:
-        Number of Dask workers
-    nthreads:
-      dtype: int
-      default: 8
-      info:
-        Number of threads per Dask worker
 
   steps:
     image:
@@ -103,12 +103,31 @@ movie:
       info: Make high cadence images
       params:
         ms: =recipe.ms
+        data-column: =recipe.data-column
+        sigma-column: =recipe.sigma-column
+        gain-table: =IFSET(recipe.gain-table)
         product: =recipe.product
         output-format: =recipe.output-format
+        nworkers: 4
+        nthreads: 6
+        integrations-per-image: =recipe.integrations-per-image
+        channels-per-image: =recipe.channels-per-image
+        field-of-view: =recipe.field-of-view
+        super-resolution-factor: =recipe.super-resolution-factor
+        # why is this needed?
+        output-filename: '{recipe.s3dir}/stage_{recipe.stage}'
+        fits-output-folder: '{recipe.efsdir}/stage_{recipe.stage}/fits'
+        log-directory: '{recipe.efsdir}/stage_{recipe.stage}/logs'
     
-    movie:
+    animate:
       cab: pfb.smoovie
       info: Render images to movie
       params:
         product: =recipe.product
         fps: =recipe.fps
+        nworkers: 1
+        nthreads: 1
+        out-format: mp4
+        output-filename: '{recipe.efsdir}/stage_{recipe.stage}'
+        fits-output-folder: '{recipe.efsdir}/stage_{recipe.stage}/fits'
+        log-directory: '{recipe.efsdir}/stage_{recipe.stage}/logs'

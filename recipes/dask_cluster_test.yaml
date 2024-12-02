@@ -71,16 +71,29 @@ cabs:
       host_address = os.environ.get("DASK_SCHEDULER_ADDRESS")
       client = Client(host_address)
       client.wait_for_workers(nworkers)
+      import xarray as xr
+      from daskms import xds_from_storage_ms
+      xds = xds_from_storage_ms('s3://ratt-public-data/LBAND_LUNO_CALIBRATORS.zarr')
+
+
+      subds = xds[0]
+
+      data_vars = {
+                  'ANT1': (subds.ANTENNA1.dims, subds.ANTENNA1.data)
+      }
+
+      wds = xr.Dataset(data_vars=data_vars)
+
+      wds.to_zarr('s3://rarg-test-data/LBAND_LUNO_CALIBRATORS_SUBDS.zarr',
+                    mode='w', compute=True)
       
+      subds2 = xr.open_zarr('s3://rarg-test-data/LBAND_LUNO_CALIBRATORS_SUBDS.zarr')
+
+      print(subds2)
+
       x = da.ones((10000, nworkers), chunks=(10000, 1))
 
       xsum = da.sum(x).compute()
-
-      print(xsum)
-
-      # from time import sleep
-      # while True:
-      #   sleep(5)
 
       with open('/mnt/data/test.txt', 'w') as file:
         file.write(str(xsum))
@@ -98,7 +111,7 @@ cabs:
     outputs:
       {}
 
-timeout_test:
+dask_test:
   steps:
     test:
       cab: test
