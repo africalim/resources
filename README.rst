@@ -1,7 +1,7 @@
-African Calibration and Imaging Infrastructure Setup
+Africalim Infrastructure Setup
 ====================================================
 
-The African Calibration and Imaging Workshop is hosted on an `Elastic Kubernetes Server <eks_>`_ (EKS) cluster.
+The Africalim Workshop is hosted on an `Elastic Kubernetes Server <eks_>`_ (EKS) cluster.
 
 Access to the cluster is provided through Github credentials.
 
