@@ -1,0 +1,22 @@
+cabs:
+  greeter:
+    info: this says hello to 'who' 
+    flavour: python-code
+    command: print("Hello", who, "!")
+    inputs:
+      who:
+        dtype: str
+        required: true
+
+hello:
+  info: This is my hello world recipe
+  inputs:
+    name:
+      dtype: str
+      default: world
+  steps:
+    ola:
+      info: this runs the greeter cab to print a greeting
+      cab: greeter
+      params:
+        who: =recipe.name
