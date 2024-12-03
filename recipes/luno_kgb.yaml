@@ -8,8 +8,7 @@ opts:
   backend:
     select: native
 
-
-1GC:
+first-gen:
   name: 1gc
   info: First generation KGB calibration using QuartiCal
 
@@ -24,7 +23,6 @@ opts:
     model-column:
       dtype: str
       default: MODEL_DATA
-
 
   steps:
     kgb:
@@ -182,6 +180,9 @@ cabs:
       select: native
       native:
         virtual_env: ~/.venv/pfbn
+    image:  # This is a bit dodgy - python-astro doesn't have zarr support.
+      name: quartical
+      version: 0.2.5-cc0.1.3
     command: |
       import dask
       import dask.array as da
@@ -205,3 +206,7 @@ cabs:
 
     outputs:
       {}
+
+  quartical:
+    image:
+      version: 0.2.5-cc0.1.3  # Use latest QuartiCal release.
