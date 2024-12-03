@@ -100,7 +100,7 @@ Then run the KGB recipe using
 
 .. code:: bash
 
-  stimela -C run recipes/luno_kgb.yaml recipes/kgb_kubeconfig.yaml 1GC basedir=/mnt/data/<group-name>-test
+  stimela -C run recipes/luno_kgb.yaml recipes/kgb_kubeconfig.yaml first-gen basedir=/mnt/data/<group-name>-test
 
 
 .. _eks: https://aws.amazon.com/eks/
