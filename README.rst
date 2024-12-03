@@ -86,6 +86,23 @@ Then you should be able to run
 This will bring up the radiopadre server in a pod which opens a file browser and a CARTA instance.
 We'll use CARTA to inspect fits files later on. For now simply make sure you can access the file your hello-world script writes to.
 
+
+Runnimg the KGB recipe
+=======================
+
+Install the following version of cult-cargo (possibly in the fresh virtual environment)
+
+.. code:: bash
+
+  pip install pip install git+https://github.com/caracal-pipeline/cult-cargo.git@pfb-imaging kubernetes
+
+Then run the KGB recipe using
+
+.. code:: bash
+
+  stimela -C run recipes/luno_kgb.yaml recipes/kgb_kubeconfig.yaml 1GC basedir=/mnt/data/<group-name>-test
+
+
 .. _eks: https://aws.amazon.com/eks/
 .. _github_join: https://github.com/join
 .. _greek_alphabet: https://en.wikipedia.org/wiki/Greek_alphabet
