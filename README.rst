@@ -68,7 +68,23 @@ If this does not work without appending your namespace to the command then run
 
   $ kubectl config set-context --current --namespace=<group_name>
 
+Using radiopadre to access EFS
+===============================
 
+First install radiopadre-client (use a new virtual environment)
+
+.. code:: bash
+
+  $ pip install radiopadre-client
+
+The you should be able to run
+
+.. code:: bash
+
+  $ run-radiopadre -K <group-name>-efs-pvc: --k8s-node-selector rarg/node-class=compute,rarg/instance-type=m5.large -e
+
+This will bring up the radiopadre server in a pod which opens a file browser and a CARTA instance.
+We'll use CARTA to inspect fits files later on. For now simply make sure you can access the file your hello-world script writes to.
 
 .. _eks: https://aws.amazon.com/eks/
 .. _github_join: https://github.com/join
