@@ -94,7 +94,7 @@ Install the following version of cult-cargo (possibly in the fresh virtual envir
 
 .. code:: bash
 
-  pip install pip install git+https://github.com/caracal-pipeline/cult-cargo.git@pfb-imaging kubernetes
+  pip install git+https://github.com/caracal-pipeline/cult-cargo.git@pfb-imaging kubernetes
 
 Then run the KGB recipe using
 
