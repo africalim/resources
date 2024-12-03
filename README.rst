@@ -75,21 +75,7 @@ First clone radiopadre-client
 
 .. code:: bash
 
-  git clone https://github.com/africalim/resources.git
-
-Check out the b1.2.3 branch and install it in dev mode  (use a new virtual environment)
-
-.. code:: bash
-
-  cd radiopadre-client
-  git checkout b1.2.3
-  pip install -e .
-
-Install kubernetes and PyYAML
-
-.. code:: bash
-
-  pip install PyYAML kubernetes
+  pip install git+https://github.com/ratt-ru/radiopadre-client.git@b1.2.3 kubernetes
 
 Then you should be able to run
 
