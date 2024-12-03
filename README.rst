@@ -81,7 +81,7 @@ Then you should be able to run
 
 .. code:: bash
 
-  run-radiopadre -K <group-name>-efs-pvc: --k8s-node-selector rarg/node-class=compute,rarg/instance-type=m5.4xlarge -e
+  run-radiopadre -K <group-name>-efs-pvc: --k8s-node-selector rarg/node-class=compute,rarg/instance-type=m5.4xlarge -e --k8s-uid 1000 --k8s-gid 1000
 
 This will bring up the radiopadre server in a pod which opens a file browser and a CARTA instance.
 We'll use CARTA to inspect fits files later on. For now simply make sure you can access the file your hello-world script writes to.
