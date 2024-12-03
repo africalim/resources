@@ -71,17 +71,31 @@ If this does not work without appending your namespace to the command then run
 Using radiopadre to access EFS
 ===============================
 
-First install radiopadre-client (use a new virtual environment)
+First clone radiopadre-client
 
 .. code:: bash
 
-  $ pip install radiopadre-client
+  git clone git@github.com:ratt-ru/radiopadre-client.git
 
-The you should be able to run
+Check out the b1.2.3 branch and install it in dev mode  (use a new virtual environment)
 
 .. code:: bash
 
-  $ run-radiopadre -K <group-name>-efs-pvc: --k8s-node-selector rarg/node-class=compute,rarg/instance-type=m5.large -e
+  cd radiopadre-client
+  git checkout b1.2.3
+  pip install -e .
+
+Install kubernetes and PyYAML
+
+.. code:: bash
+
+  pip install PyYAML kubernetes
+
+Then you should be able to run
+
+.. code:: bash
+
+  run-radiopadre -K <group-name>-efs-pvc: --k8s-node-selector rarg/node-class=compute,rarg/instance-type=m5.4xlarge -e
 
 This will bring up the radiopadre server in a pod which opens a file browser and a CARTA instance.
 We'll use CARTA to inspect fits files later on. For now simply make sure you can access the file your hello-world script writes to.
