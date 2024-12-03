@@ -1,7 +1,6 @@
 _include:
   - (cultcargo)pfb-imaging.yml
-
-
+  # - (pfb)stimela_cabs.yml
 
 opts:
   log:
@@ -48,7 +47,7 @@ movie:
         Stokes parameter to image
     integrations-per-image:
       dtype: int
-      default: 1
+      default: 4
       info:
         Number of time integrations per image
     channels-per-image:
@@ -114,6 +113,7 @@ movie:
         channels-per-image: =recipe.channels-per-image
         field-of-view: =recipe.field-of-view
         super-resolution-factor: =recipe.super-resolution-factor
+        overwrite: =recipe.overwrite
         # why is this needed?
         output-filename: '{recipe.s3dir}/stage_{recipe.stage}'
         fits-output-folder: '{recipe.efsdir}/stage_{recipe.stage}/fits'
