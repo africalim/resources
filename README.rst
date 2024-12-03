@@ -75,7 +75,7 @@ First clone radiopadre-client
 
 .. code:: bash
 
-  git clone git@github.com:ratt-ru/radiopadre-client.git
+  git clone https://github.com/africalim/resources.git
 
 Check out the b1.2.3 branch and install it in dev mode  (use a new virtual environment)
 
