@@ -71,7 +71,7 @@ If this does not work without appending your namespace to the command then run
 Using radiopadre to access EFS
 ===============================
 
-First clone radiopadre-client
+Create a fresh virtual environment and install radiopadre-client using
 
 .. code:: bash
 
