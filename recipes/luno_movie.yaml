@@ -7,7 +7,7 @@ opts:
     dir: logs
     nest: 2
   backend:
-    select: native
+    select: singularity
 
 movie:
   name: movie
@@ -128,6 +128,6 @@ movie:
         nworkers: 1
         nthreads: 1
         out-format: mp4
-        output-filename: '{recipe.efsdir}/stage_{recipe.stage}'
+        output-filename: '{recipe.s3dir}/stage_{recipe.stage}'
         fits-output-folder: '{recipe.efsdir}/stage_{recipe.stage}/fits'
         log-directory: '{recipe.efsdir}/stage_{recipe.stage}/logs'
