@@ -87,7 +87,7 @@ This will bring up the radiopadre server in a pod which opens a file browser and
 We'll use CARTA to inspect fits files later on. For now simply make sure you can access the file your hello-world script writes to.
 
 
-Runnimg the KGB recipe
+Running the KGB recipe
 =======================
 
 Install the following version of cult-cargo (possibly in the fresh virtual environment)
