@@ -33,7 +33,7 @@ movie:
         Suggest using the Jones chain e.g. KGB
     ms:
       dtype: URI
-      required: true
+      default: s3://ratt-public-data/LBAND_LUNO_TARGET.zarr
       info:
         Path to MS
     gain-table:

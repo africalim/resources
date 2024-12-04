@@ -102,6 +102,17 @@ Then run the KGB recipe using
 
   stimela -C run recipes/luno_kgb.yaml recipes/kgb_kubeconfig.yaml first-gen basedir=/mnt/data/<group-name>-test
 
+Running the KGB movie recipe
+============================
+
+Inside your cult-cargo virtual environment run the following from the resources repository
+
+.. code:: bash
+
+  stimela -C run recipes/luno_movie.yaml recipes/movie_kubeconfig.yaml s3dir=s3://rarg-test-data/group-name-pfb-movie-kgb efsdir=/mnt/data/group-name-test stage=KGB gain-table=/mnt/data/group-name-test/target_init.qc/GKBD-net product=I
+
+Make sure gain-table points to the GKBD-net table that was written when you ran the KGB recipe.
+
 
 .. _eks: https://aws.amazon.com/eks/
 .. _github_join: https://github.com/join
