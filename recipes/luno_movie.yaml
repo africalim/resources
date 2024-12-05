@@ -13,6 +13,11 @@ movie:
   name: movie
   info: Image a column with high time cadence and turn it into a movie 
 
+  for_loop:
+    var: product
+    over: [I, Q, U, V]
+    # scatter: 4  # to do it in parallel
+
   inputs:
     s3dir:
       dtype: URI
@@ -43,6 +48,7 @@ movie:
     product:
       dtype: str
       default: I
+      choices: [I, Q, U, V]
       info:
         Stokes parameter to image
     integrations-per-image:
@@ -107,8 +113,8 @@ movie:
         gain-table: =IFSET(recipe.gain-table)
         product: =recipe.product
         output-format: =recipe.output-format
-        nworkers: 4
-        nthreads: 6
+        nworkers: 32
+        nthreads: 2
         integrations-per-image: =recipe.integrations-per-image
         channels-per-image: =recipe.channels-per-image
         field-of-view: =recipe.field-of-view

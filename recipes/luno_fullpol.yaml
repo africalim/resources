@@ -24,7 +24,7 @@ first-gen:
 
   assign:
     ms_cals: /home/bester/projects/MOON/msdir/l_cal.zarr # s3://ratt-public-data/LBAND_LUNO_CALIBRATORS.zarr
-    ms_target: /home/bester/projects/MOON/msdir/l_cal.zarr  # s3://ratt-public-data/LBAND_LUNO_TARGET.zarr
+    ms_target: /home/bester/projects/MOON/msdir/l_moon.zarr  # s3://ratt-public-data/LBAND_LUNO_TARGET.zarr
 
   inputs:
     basedir:
@@ -224,7 +224,7 @@ first-gen:
         # output.columns: [CORRECTED_DATA_QCAL, WEIGHT_SPECTRUM]
         output.flags: false
         output.apply_p_jones_inv: false
-        output.net_gains: [[G,K,B,D,P],[G,K,B,D]]
+        output.net_gains: [[G,K,B,D,C,P],[G,K,B,D,P]]
         mad_flags.enable: false
         dask.threads: 32
         dask.scheduler: threads
